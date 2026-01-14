@@ -73,7 +73,8 @@ git clone https://github.com/your-username/wanderlust.git
 cd wanderlust
 npm install
 ```
-Create a .env file in root and add:
+---
+## Create a .env file in root and add:
 
 -CLOUDINARY_CLOUD_NAME=your_key
 -CLOUDINARY_KEY=your_key
@@ -81,5 +82,6 @@ Create a .env file in root and add:
 -MAP_TOKEN=your_token
 -DB_URL=your_mongodb_url
 -SESSION_SECRET=your_secret
+---
 ```
 node app.js
