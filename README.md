@@ -1,4 +1,3 @@
-# Wanderlust
 # 🌍 Wanderlust
 
 Wanderlust is a full-stack travel listing and exploration platform where users can discover, list, and review destinations and stays from around the world. The project focuses on clean UI, scalable backend architecture, secure authentication, and real-world production patterns.
