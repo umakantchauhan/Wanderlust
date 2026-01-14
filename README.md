@@ -75,12 +75,11 @@ npm install
 ```
 Create a .env file in root and add:
 
-CLOUDINARY_CLOUD_NAME=your_key
-CLOUDINARY_KEY=your_key
-CLOUDINARY_SECRET=your_secret
-MAP_TOKEN=your_token
-DB_URL=your_mongodb_url
-SESSION_SECRET=your_secret
-
+-CLOUDINARY_CLOUD_NAME=your_key
+-CLOUDINARY_KEY=your_key
+-CLOUDINARY_SECRET=your_secret
+-MAP_TOKEN=your_token
+-DB_URL=your_mongodb_url
+-SESSION_SECRET=your_secret
 ```
 node app.js
