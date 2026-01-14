@@ -13,8 +13,8 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.showListing = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id)
-    .populate({ path: "reviews", populate: { path: "author" } })
-    .populate("owner");
+    .populate({ path: "reviews", populate: { path: "author" } }) //this help to populate the author for the each review owner
+    .populate("owner"); //the populate is very inportant to see the comments insted of comments id
   if (!listing) {
     req.flash("error", "Listing you requested for does not exists");
   }
@@ -60,12 +60,13 @@ module.exports.createListing = async (req, res, next) => {
   }
   const geoData = await forwardGeocode(req.body.listing.location);
 
+  //from here below is the code for uploading the image to cloudinary
   let url = req.file.path;
   let filename = req.file.filename;
 
   const newListing = new Listing(req.body.listing); //this .listing give all the data from the name to description etc
   newListing.owner = req.user._id;
-  newListing.image = { url, filename };
+  newListing.image = { url, filename }; //this make the add this data to mongodb.
 
   if (geoData) {
     newListing.geometry = {
@@ -76,7 +77,7 @@ module.exports.createListing = async (req, res, next) => {
 
   let savedListing = await newListing.save();
   console.log(savedListing);
-  req.flash("success", "New Listing Created!");
+  req.flash("success", "New Listing Created!"); //npm package for displaying the success message (key,value) pair
   res.redirect("/listings");
 };
 
@@ -94,9 +95,10 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }); // this gets the data to update.
   //{ ...req.body.listing } decontructing and getting individual values and updating
   if (typeof req.file !== "undefined") {
+    //safety so that if there is no changes then it shold give any error. NOTE we use type of
     let url = req.file.path;
     let filename = req.file.filename;
     listing.image = { url, filename };

@@ -32,7 +32,7 @@ module.exports.isOwner = async (req, res, next) => {
 module.exports.validateListing = (res, req, next) => {
   let { error } = listingSchema.validate(req.body);
   if (error) {
-    let errMsg = error.details.map((el) => el.message).join(",");
+    let errMsg = error.details.map((el) => el.message).join(","); //this line is used for remove each of the error messages or map each of the error message and joined using the , for the readable format
     throw new ExpressError(400, errMsg);
   } else {
     next();
@@ -40,7 +40,7 @@ module.exports.validateListing = (res, req, next) => {
 };
 
 module.exports.validateReview = (res, req, next) => {
-  let { error } = reviewSchema.validate(req.body);
+  let { error } = reviewSchema.validate(req.body); //reviewSchema in the schema.js ;with the help of reviewSchema and joi we are validating
   if (error) {
     let errMsg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(400, errMsg);

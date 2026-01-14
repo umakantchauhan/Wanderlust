@@ -18,4 +18,4 @@ const reviewSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Review", reviewSchema);
+module.exports = mongoose.model("Review", reviewSchema); //Review: name se this is going to stored

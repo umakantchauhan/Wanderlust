@@ -17,6 +17,7 @@ router
   .post(
     saveRedirectUrl,
     passport.authenticate("local", {
+      //passport.authenticate this middleware authenticate automatically
       failureRedirect: "/login",
       failureFlash: true,
     }),

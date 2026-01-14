@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const session = require("express-session");
+const session = require("express-session"); //for storing the session in the form of cookies
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -42,34 +42,36 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const sessionOptions = {
   secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
+  resave: false, //Setting resave to false is generally the recommended practice. With this setting, the session is only saved back to the store when it has been explicitly modified
+  saveUninitialized: true, //forces a session to be saved to the session store even if it is new but not modified.
+
   cookie: {
+    //time limit till which the cookies will stay
     expries: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
+    httpOnly: true, //to prevent from the cross scripting attacks.
   },
 };
 
-app.use(session(sessionOptions));
-app.use(flash());
+app.use(session(sessionOptions)); //for the cookies
+app.use(flash()); //npm package for the error message display
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate())); //this User is in the models.
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
+  //flash npm package to show the success message
+  res.locals.success = req.flash("success"); //koi bhi success message is saved in res.locals.success same for all below
   res.locals.error = req.flash("error");
-  res.locals.currUser = req.user;
-  next();
+  res.locals.currUser = req.user; //used in navbar.ejs to authenticate
+  next(); //!!!important other we will be stuck
 });
 
 app.use("/listings", listingRouter); //show route
-
 app.use("/listings/:id/reviews", reviewRouter); // new route
 app.use("/", userRouter);
 

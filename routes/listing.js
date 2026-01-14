@@ -11,17 +11,14 @@ const multer = require("multer");
 
 const { storage } = require("../cloudConfig");
 
-const upload = multer({ storage });
+const upload = multer({ storage }); //this upod of multer will upload the files to the storage that's cloudinary
 
-router
-  .route("/")
-  .get(wrapAsync(listingController.index))
-  .post(
-    isLoggedIn,
-    validateListing,
-    upload.single("listing[image]"),
-    wrapAsync(listingController.createListing)
-  );
+router.route("/").get(wrapAsync(listingController.index)).post(
+  isLoggedIn,
+  validateListing,
+  upload.single("listing[image]"), //this is multer npm package to make the file type data undsrstndable to backend and send the data to cloud and save name as listing[image]
+  wrapAsync(listingController.createListing)
+);
 
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 

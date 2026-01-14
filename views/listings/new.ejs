@@ -2,6 +2,7 @@
 <div class="row mt-3">
   <div class="col-8 offset-2">
     <h3>Cereate new listings</h3>
+    <!-- in the forms :novalidate: this makes the default browser setting of if field is empty then default browser setting is shown so this make it of so that we can add our custom error message using bootstrap which will work on every browser  -->
     <form
       method="post"
       action="/listings"
@@ -9,6 +10,7 @@
       class="needs-validation"
       enctype="multipart/form-data"
     >
+      <!-- enctype="multipart/form-data" This enctype makes capable the frontend data or the file to our backend ; -->
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input

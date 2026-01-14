@@ -3,9 +3,9 @@ const Review = require("../models/review");
 
 module.exports.createReview = async (req, res) => {
   let listing = await Listing.findById(req.params.id);
-  let newReview = new Review(req.body.review);
-  newReview.author = req.user._id;
-  listing.reviews.push(newReview);
+  let newReview = new Review(req.body.review); //extracting the review form
+  newReview.author = req.user._id; //jo author banega current review ka wo hoga current logedin user
+  listing.reviews.push(newReview); //reviews array is been pushed in the backend
 
   await newReview.save();
   await listing.save();

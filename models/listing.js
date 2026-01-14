@@ -18,7 +18,7 @@ const listingSchema = new Schema({
   country: String,
   reviews: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId, //so that particular hotel id ke niche hi wo reviews aajae
       ref: "Review",
     },
   ],
@@ -39,9 +39,10 @@ const listingSchema = new Schema({
   },
 });
 
+//implementing the feature that when the listing is been deleted the reviews of that listing also be deleted.
 listingSchema.post("findOneAndDelete", async (listing) => {
   if (listing) {
-    await Review.deleteMany({ _id: { $in: listing.reviews } });
+    await Review.deleteMany({ _id: { $in: listing.reviews } }); //whichever listing _id in reviews delete that all
   }
 });
 

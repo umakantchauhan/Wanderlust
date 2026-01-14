@@ -29,7 +29,7 @@ module.exports.renderLoginForm = (req, res) => {
 
 module.exports.login = async (req, res) => {
   req.flash("success", "Welcome to wanderLust! You are logged in!");
-  let redirectUrl = res.locals.redirectUrl || "/listings";
+  let redirectUrl = res.locals.redirectUrl || "/listings"; //this came form the middleware -> routes/user -> here.
   res.redirect(redirectUrl);
 };
 
