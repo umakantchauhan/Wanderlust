@@ -65,7 +65,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/wanderlust.git
 cd wanderlust
-
+```
 <img width="1709" src="https://github.com/user-attachments/assets/4745e158-b259-4f3c-a16e-b7a0b65d42c4" />
 <img width="1710" src="https://github.com/user-attachments/assets/05a2d3d2-340b-4222-ac24-f2d493447626" />
 <img width="1710" src="https://github.com/user-attachments/assets/39524489-ea12-40d7-8f02-8b08e152e1ad" />
